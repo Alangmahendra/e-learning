@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <a href="questions/add">add question</a>
+    <table border>
+      <tr>
+        <th>no</th>
+        <th>id</th>
+        <th>question</th>
+        <th>answer</th>
+        <th>subject id</th>
+        <th colspan="2">action</th>
+      </tr>
+      <%let i =1 %>
+      <% rows.forEach(row=>{%>
+          <tr>
+            <td><%=i++%></td>
+            <td><%=row.id%></td>
+            <td><%=row.question%></td>
+            <td><%=row.answer%></td>
+            <td><%=row.SubjectId%></td>
+            <td> <a href="/questions/edit/<%=row.id%>">edit</a> </td>
+            <td> <a href="/questions/delete/<%=row.id%>">delete</a> </td>
+          </tr>
+        <%})%>
+    </table>
+  </body>
+</html>

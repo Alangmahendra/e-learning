@@ -7,12 +7,24 @@
   <body>
     <table border>
       <tr>
+        <th>no</th>
+        <th>id</th>
         <th>user</th>
+        <th>email</th>
+        <th>password</th>
+        <th colspan="2">action</th>
         <th>redirect</th>
       </tr>
+      <%let i = 1%>
         <%rows.forEach(row=>{%>
           <tr>
+            <td><%=i++%></td>
+            <td><%= row.id %></td>
             <td><%=row.username%></td>
+            <td><%= row.email %></td>
+            <td><%=row.password%></td>
+            <td><a href="/users/edit/<%=row.id%>">edit</a></td>
+            <td><a href="/users/delete/<%=row.id%>">delete</a></td>
             <td><a href="/users/list/<%=row.id%>">detail</a></td>
           </tr>
           <%})%>

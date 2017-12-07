@@ -30,29 +30,44 @@ const Model = require('../models');
 
 
   router.post('/:id/addsubject',(req,res)=>{
-    console.log('----------------',req.body);
+    let subject_id = req.params.id
     let obj ={
       UserId :req.params.id,
       SubjectId:req.body.SubjectId
     }
-    Model.UserSubject.create(obj).then(()=>{
-      res.redirect('/users')
+    Model.UserSubject.findOne({
+      where: {SubjectId: subject_id}
+    })
+    .then(rowsId=>{
+      Model.UserSubject.create(obj).then(()=>{
+        res.redirect(`/users/list/${rowsId.UserId}`)
+      })
     })
   })
 
   router.get('/:id/test',(req,res)=>{
     let id = req.params.id
     Model.Subject.findById(id).then(rowSubs=>{
-      Model.Question.findAll({where:{SubjectId:id}}).then(rowQuest=>{
+      Model.Question.findAll({where:{SubjectId:id},order:['id']}).then(rowQuest=>{
         res.render('testQuestion',{rowSubs:rowSubs,rowQuest:rowQuest})
       })
     })
   })
 
+  router.post('/:id/test',(req,res)=>{
+
+
+  })
+
   router.get('/subjectdelete/:id',(req,res)=>{
-    let id = req.params.id
-    Model.UserSubject.destroy({where:{id:id}}).then(()=>{
-      res.redirect('/users')
+    let subject_id = req.params.id
+    Model.UserSubject.findOne({
+      where: {SubjectId: subject_id}
+    })
+    .then(rowsId=>{
+      Model.UserSubject.destroy({where:{SubjectId:subject_id}}).then(()=>{
+        res.redirect(`/users/list/${rowsId.UserId}`)
+      })
     })
   })
 
