@@ -55,8 +55,7 @@ const Model = require('../models');
   })
 
   router.post('/:id/test',(req,res)=>{
-
-
+    
   })
 
   router.get('/subjectdelete/:id',(req,res)=>{
